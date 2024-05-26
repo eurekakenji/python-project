@@ -3,11 +3,12 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define h = Character("stas")
+define u = Character("???")
+define h = Character("unknown")
 define e = Character("Scout")
 define m = Character("Main")
 define t = Character("Pyro")
-define y = Character("Heavy")
+define y = Character("Liia")
 define d = Character("Dictator")
 define b = Character("Raamatukoguhoidja")
 
@@ -25,33 +26,33 @@ label start:
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
     # Dialouges yippe!
-    d "See päev on koolis käimiseks väga ilus, kas pole?"
+    d "Ilus koolipäev, eks?"
     menu:
-        "*Siseneb F korpus*":
-            d "Sisened F korpus"
-        "*Pöörab ümber ja läheb koju*":
+        "*Sisenen F korpusesse*":
+            d "Sisened F korpusesse"
+        "*Pööran ümber ja lähen koju*":
             d "..."
             "Vau"
             "Lihtsalt vau"
-            "Saate aru, et kui lähete lihtsalt tagasi, siis mäng ise ei juhtu, eks?"
+            "ehk sina tea, et kui sa lihtsalt keerad perse ukse poole ja sihkertad koju tagasi, et mängu ei toimu ju?"
             menu:
                 "Tõsiselt? Oih.":
-                    d "Muutis mu meelt"
-                    "Sisened F korpus"
-                "Mind ei huvita":
+                    d "vot. {i}ahem{/i},"
+                    "Sisened F korpusesse"
+                "Mul savi":
                     d "..."
-                    "Oh mine ära"
-                    "Kui mängu looja poleks liiga laisk, et väljapoole mingit süžeed lisada, aga muidu laseks sisse."
+                    "meil ka savi, tõsiselt"
+                    "meil on türa 16. juunini vaja ära teha, me oleksime midagi pannud siia texti mõttes aga meil on kiire, vot sulle su {i}easter egg{/i}."
                     return
     d "Olete F korpuses."
     "Vasakul pool on riietusruum, sirge trepp teisele korrusele ja kuulipilduja, paremal toolid. Kuhu sa esimesena lähed?"
     menu:
         "Riietusruumi":
-            d "Sisened riietusruumi, võtad seljast tänavariided ja riputad need riidekapi külge."
+            d "Sisened riietusruumi, võtad seljast õueriided ja riputad nad riietuspuu külge."
         "Maja F 2 korrusele":
             d "Kas te ei taha kunagi ülerõivaid seljast võtta? Noh, nagu soovite"
             d "Mõni inimene läheneb sulle"
-        "Mine toidupoe automaati":
+        "Mine kooli automaati":
             d "Kas sul on raha?"
             menu:
                 "Jah":
@@ -63,67 +64,79 @@ label start:
                     "Näed kedagi masinale lähenemas ja ütled talle tere, lootes, et ta annab sulle raha."
         "Ma lähen istuma":
             d "Sa istusid toolile."
-            "Olen kindel, et sa olid siia jõudmisest väga väsinud. Võta aega."
+            "Olen kindel, et sa olid siia jõudmisest väga väsinud. Puhka natuke."
             menu:
-                "Ma puhkasin":
-                    d "Sa tõusid püsti ja keegi lähenes sulle kohe"
+                "Puhkan veidi":
+                    d "Tõused püsti ja keegi läheneb sulle kohe"
                 "...":
                     d "Keegi läheneb sulle."
-        "Ma lähen koju":
+        "Lähen koju":
             d "."
             d "."
             d "😭"
             return
     # These display lines of dialogue.
 
-image sammich = im.Scale("hevi.jpg", 500, 900)
-show sammich at center
-y "OH TSAU! TEI TERE! TERE!"
-m "Ma kuulsin seda esimest korda. Tere."
-y "Kas soovite teenida lisaraha?"
+image Liia = im.Scale("Liia.jpg", 500, 900)
+show Liia at center
+u "Tšau."
+m "Noh tšau. Mis su nimi on?"
+y "Liia. Uus oled või?"
 menu:
-    "Kummaline ettepanek. Ma olen poolt":
-        y "Olgu, siis mine raamatukokku ja too mulle raamat, ma tulen kohale. Mul keelati sinna minna, sest hävitasin 10 raamatut."
-        m "Hästi tehtud, see on lihts... kuigi unustage nüüd, mida ma ütlesin"
-        d "Sa lähed raamatukokku."
-        "Vaatad raamatukogus ringi. Näete palju raamatuid, samuti kahte arvutit, millest üks millegipärast ei tööta, kabet ja malet."
-        "Te ei leidnud raamatukoguhoidjat."
-        m "Hm. Kui seda seal pole, siis..."
+    "noh jah":
+        y "nagu arvasinki."
+        m "Kus ma olen siis? oled siin kaua õppind?"
+        y "Kolmas kursus, jah, olen kaua olnd. oled F korpuses."
+        m "Mis siis F korpuses on?"
+        y "Siin on peamiselt mehhaanikud ja keevitajad, see on see suur praktika korpus, siin veel käivad IT tüübid ka, arvuti klassid on olemas küll."
+        m "Selge, aga siis siit midagi muud ei ole peale seda?"
+        y "Su taga on E korpus, minu taga aga raamatukogu, kust saad raamatu või õpiku võtta."
+        menu questions:
+            "kogu aeg nii väsind oled või?":
+                y "ega kas programmeeria ole programmeeria kui ta ei ole iga päev oma päeva kõige madalamas punktis ja ei maga stressi tõttu?"
+                m "noh. jah."
+                jump questions
+            "kogu aeg nii väsind oled või?":
+                pass
+            "kogu aeg nii väsind oled või?":
+                pass
+            "kogu aeg nii väsind oled või?":
+                pass
+    "Oota":
+        m "Ok, ma ootan."
+        jump WayLibrary
         menu:
-            "Oota":
-                m "Ok, ma ootan."
-                jump WayLibrary
             "Mine välja ja ütle sellele inimesele":
-                m "Ei, see võtab kaua aega. Ma ütlen sellele inimesele, et mul pole seda ja võib-olla jätab ta mu rahule."
-                d "Sa lahkud raamatukogust ja lähed selle inimese juurde."
-                y "Hei, kas sa tulid kiiresti tagasi ja võtsid raamatu?"
-                m "Ei, teda polnud seal"
-                y "Kas sa ei võiks teda lihtsalt oodata?"
-                m "Saaks küll, aga see võtaks kaua aega ja ma ei taha oma aega raisata ainult raamatukoguhoidja ootamisele."
-                y "Ta naaseb alati 10 minuti jooksul."
-                m "Veennud."
-                d "Lähed tagasi raamatukokku"
-                jump WayLibrary
+                                                m "Ei, see võtab kaua aega. Ma ütlen sellele inimesele, et mul pole seda ja võib-olla jätab ta mu rahule."
+                                                d "Sa lahkud raamatukogust ja lähed selle inimese juurde."
+                                                y "Hei, kas sa tulid kiiresti tagasi ja võtsid raamatu?"
+                                                m "Ei, teda polnud seal"
+                                                y "Kas sa ei võiks teda lihtsalt oodata?"
+                                                m "Saaks küll, aga see võtaks kaua aega ja ma ei taha oma aega raisata ainult raamatukoguhoidja ootamisele."
+                                                y "Ta naaseb alati 10 minuti jooksul."
+                                                m "Veennud."
+                                                d "Lähed tagasi raamatukokku"
+                                                jump WayLibrary
             "Varastada raamat":
-                m "Kuigi selline võimalus on olemas."
-                d "Võtsid raamatu ja jooksid raamatukogust minema."
-                m "JOOKSE MINU JÄRELE!"
-                d "Jooksete tundmatusse sihtkohta, kuid teil õnnestus põgeneda enne, kui ta naasis."
-                y "Oot, mis juhtus?"
-                m "Varastasin raamatu ja pidin minema."
-                d "Vaatad raamatu kaant."
-                m ".... ja võtsin Cole ja Lohe Päästesalk."
-                "Olgu, kuulge, ma ei tea, mis raamat see on."
-                y "Lol, sa oled nüüd lindprii, ah?"
-                m "Jah jah, ole vait"
-                y "Ära pabista. Siin on 5 eurot raamatu kohta. Muide, raamatukogu juures oli videovalvekaamera ja see salvestas, kuidas sa raamatu varastasid."
-                m "Mind ei huvita, kui nad kahtlustavad sind varguses, sa ei saa praegu raamatukokku minna, aga 5 eurot on 5 eurot. Aitäh"
-                y "Nüüd oli karm. Ma lähen F-hoone teisest sissepääsust."
-                d "Ta läheb alla."
+                            m "Kuigi selline võimalus on olemas."
+                            d "Võtsid raamatu ja jooksid raamatukogust minema."
+                            m "JOOKSE MINU JÄRELE!"
+                            d "Jooksete tundmatusse sihtkohta, kuid teil õnnestus põgeneda enne, kui ta naasis."
+                            y "Oot, mis juhtus?"
+                            m "Varastasin raamatu ja pidin minema."
+                            d "Vaatad raamatu kaant."
+                            m ".... ja võtsin Cole ja Lohe Päästesalk."
+                            "Olgu, kuulge, ma ei tea, mis raamat see on."
+                            y "Lol, sa oled nüüd lindprii, ah?"
+                            m "Jah jah, ole vait"
+                            y "Ära pabista. Siin on 5 eurot raamatu kohta. Muide, raamatukogu juures oli videovalvekaamera ja see salvestas, kuidas sa raamatu varastasid."
+                            m "Mind ei huvita, kui nad kahtlustavad sind varguses, sa ei saa praegu raamatukokku minna, aga 5 eurot on 5 eurot. Aitäh"
+                            y "Nüüd oli karm. Ma lähen F-hoone teisest sissepääsust."
+                            d "Ta läheb alla."
+                            jump EkorpusII
+            "Ei": 
+                y "No sa oled vastik :("
                 jump EkorpusII
-    "Ei":
-        y "No sa oled vastik :("
-        jump EkorpusII
 label WayLibrary:
     d "Ootate raamatukoguhoidjat tagasi."
     "Ja ootad"
