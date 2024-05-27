@@ -82,9 +82,9 @@ show Liia at center
 u "Tšau."
 m "Noh tšau. Mis su nimi on?"
 y "Liia. Uus oled või?"
-menu:
-    "noh jah":
-        y "nagu arvasinki."
+menu liiaintro:
+    "Noh jah":
+        y "Nagu arvasinki."
         m "Kus ma olen siis? oled siin kaua õppind?"
         y "Kolmas kursus, jah, olen kaua olnd. oled F korpuses."
         m "Mis siis F korpuses on?"
@@ -92,16 +92,21 @@ menu:
         m "Selge, aga siis siit midagi muud ei ole peale seda?"
         y "Su taga on E korpus, minu taga aga raamatukogu, kust saad raamatu või õpiku võtta."
         menu questions:
-            "kogu aeg nii väsind oled või?":
+            "Kogu aeg nii väsind oled või?":
                 y "ega kas programmeeria ole programmeeria kui ta ei ole iga päev oma päeva kõige madalamas punktis ja ei maga stressi tõttu?"
                 m "noh. jah."
                 jump questions
-            "kogu aeg nii väsind oled või?":
-                pass
-            "kogu aeg nii väsind oled või?":
-                pass
-            "kogu aeg nii väsind oled või?":
-                pass
+            "Mis eriala õpid?":
+                y "Tarkvaraarendust. Ei soovitaks kui sulle meeldib psüühikat hoida. statistilest suurem osa programmeeriatest läksid oma eialale, sest vihkavad ennast."
+                jump questions
+            "Oma erialaga saad hästi hakkama?":
+                y "Noh, nagugi iga inimene, päris normaalselt."
+                m "Ega midagi raskusi ei too?"
+                y "Ja veel ütle, et hobused lennata oskavad, muidugi on raskusi, ega see lihtne asi ole."
+                m "arusaadav."
+                jump questions
+            "*tagasi menüü juurde*":
+                jump liiaintro
     "Oota":
         m "Ok, ma ootan."
         jump WayLibrary
