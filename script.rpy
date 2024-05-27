@@ -20,7 +20,7 @@ label start:
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
 
-    scene r
+    scene ent
 
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
@@ -29,6 +29,7 @@ label start:
     d "Ilus koolipäev, eks?"
     menu:
         "*Sisenen F korpusesse*":
+            scene Fkorp
             d "Sisened F korpusesse"
         "*Pööran ümber ja lähen koju*":
             d "..."
@@ -107,38 +108,14 @@ menu liiaintro:
                 jump questions
             "*tagasi menüü juurde*":
                 jump liiaintro
-    "Oota":
-        m "Ok, ma ootan."
-        jump WayLibrary
-        menu:
-            "Mine välja ja ütle sellele inimesele":
-                                                m "Ei, see võtab kaua aega. Ma ütlen sellele inimesele, et mul pole seda ja võib-olla jätab ta mu rahule."
-                                                d "Sa lahkud raamatukogust ja lähed selle inimese juurde."
-                                                y "Hei, kas sa tulid kiiresti tagasi ja võtsid raamatu?"
-                                                m "Ei, teda polnud seal"
-                                                y "Kas sa ei võiks teda lihtsalt oodata?"
-                                                m "Saaks küll, aga see võtaks kaua aega ja ma ei taha oma aega raisata ainult raamatukoguhoidja ootamisele."
-                                                y "Ta naaseb alati 10 minuti jooksul."
-                                                m "Veennud."
-                                                d "Lähed tagasi raamatukokku"
-                                                jump WayLibrary
-            "Varastada raamat":
-                            m "Kuigi selline võimalus on olemas."
-                            d "Võtsid raamatu ja jooksid raamatukogust minema."
-                            m "JOOKSE MINU JÄRELE!"
-                            d "Jooksete tundmatusse sihtkohta, kuid teil õnnestus põgeneda enne, kui ta naasis."
-                            y "Oot, mis juhtus?"
-                            m "Varastasin raamatu ja pidin minema."
-                            d "Vaatad raamatu kaant."
-                            m ".... ja võtsin Cole ja Lohe Päästesalk."
-                            "Olgu, kuulge, ma ei tea, mis raamat see on."
-                            y "Lol, sa oled nüüd lindprii, ah?"
-                            m "Jah jah, ole vait"
-                            y "Ära pabista. Siin on 5 eurot raamatu kohta. Muide, raamatukogu juures oli videovalvekaamera ja see salvestas, kuidas sa raamatu varastasid."
-                            m "Mind ei huvita, kui nad kahtlustavad sind varguses, sa ei saa praegu raamatukokku minna, aga 5 eurot on 5 eurot. Aitäh"
-                            y "Nüüd oli karm. Ma lähen F-hoone teisest sissepääsust."
-                            d "Ta läheb alla."
-                            jump EkorpusII
+    "Teoorias nagu tean mida teen...":
+        y "noh see küll üllatus."
+        hide Liia
+        menu options:
+            "Raamatukogu":
+                        jump WayLibrary
+            "E korpus":
+                    jump EkorpusII
             "Ei": 
                 y "No sa oled vastik :("
                 jump EkorpusII
