@@ -590,4 +590,48 @@ label Bkorp:
             m "Palun"
             d "Ta läheb oma kontorisse."
             jump LastChoice
-return
+
+label LastChoice:
+    m "No ma arvan, et olen ringi vaadanud, nüüd võin koju minna."
+    m "Olgu siis"
+    menu:
+        "Väljuda B-korpuse kaudu.":
+            m "Olgu, ma lähen"
+            n "Sa läksid kohe õue"
+            jump Conclusion
+        "Väljuda C-korpuse kaudu.":
+            m "Olgu, ma lähen"
+            d "Olete tagasi C-korpuses"
+            d "Nägid 'Tegelase nime' jälle toolil magamas"
+            d "Kuid sa otsustasid teda mitte äratada, sa ei tea kunagi, mida ta sinuga teeb."
+            d "Kõndisid edasi, kuni nägid ust tänavale."
+            d "Sa läksid hoonest C välja."
+            jump Conclusion
+        "Väljuda F-korpuse kaudu.":
+            m "Olgu, ma lähen"
+            d "Olete tagasi F-korpuses"
+            d "Nägid 'Tegelase nime' jälle toolil magamas"
+            d "Kuid sa otsustasid teda mitte äratada, sa ei tea kunagi, mida ta sinuga teeb."
+            d "Kõndisid edasi, kuni nägid ust tänavale."
+            d "Olete jõudnud F koprusse."
+            d "Liia kohtus sinuga"
+            l "Tere jälle"
+            m "Ku"
+            l "Kuidas C-hoones on?"
+            m "Jah, okei, ma tegelesin lollustega"
+            l "See on selge"
+            m "Muide, ma ei tundnud millestki ilma"
+            l "Ei"
+            m "Hästi. Ma lähen siis koju. Edu"
+            l "Jah, sama sulle"
+            d "Sa läksid majast F välja."
+            jump Conclusion
+
+label Confusion:
+    d "Olete nüüd tänaval"
+    d "Ja lähed südamerahuga koju"
+    d "Kõik"
+    d "Selle mängu lugu on läbi"
+    d "Loodan, et teile meeldis see, mida me selle aja jooksul tegime"
+    d "Aitäh mängimast!"
+    return
