@@ -8,10 +8,10 @@ define s = Character("Sass")
 define m = Character("Main")
 define j = Character("Jeremy")
 define l = Character("Liia")
-define d = Character("Narrator")
+define n = Character("Narrator")
 define b = Character("Raamatukoguhoidja")
 define r = Character("Richard")
-define n = Character ("Dan")
+define d = Character ("Dan")
 
 #image section
 image Liiaidle = "Liiaidle.png"
@@ -23,10 +23,15 @@ image Jfrown = "Jeremyfrown.png"
 image Sidle = "Sassidle.png"
 image Ssmirk = "Sasssmirk.png"
 image Sannoyed = "Sassannoyed.png"
-image lib =  "Lib.jpg"
-image rich = "Richard.jpg"
-image dan = "Dan.jpg"
-
+image Richidle  = "Richidle.png"
+image Richsmile = "Richsmile.png"
+image Richfrown = "Richfrown.png"
+image Danidle = "Danidle.png"
+image Dansmirk = "Dansmirk.png"
+image Dand = "Dandisappointed"
+image Libidle = "Libidle.png"
+image Libsmirk = "Libsmirk.png"
+image Libd = "Libdisappointed.png"
 
 # The game starts here.
 
@@ -42,22 +47,22 @@ label start:
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
     # Dialouges yippe!
-    d "Ilus koolipäev, eks?"
+    n "Ilus koolipäev, eks?"
     # These display lines of dialogue.
     menu:
         "*Sisenen F korpusesse*":
-            d "Sisened F korpusesse"
+            n "Sisened F korpusesse"
         "*Pööran ümber ja lähen koju*":
-            d "..."
+            n "..."
             "Vau"
             "Lihtsalt vau"
             "ehk sina tea, et kui sa lihtsalt keerad perse ukse poole ja sihkertad koju tagasi, et mängu ei toimu ju?"
             menu:
                 "Tõsiselt? Oih.":
-                    d "vot. {i}ahem{/i},"
+                    n "vot. {i}ahem{/i},"
                     "Sisened F korpusesse"
                 "Mul savi":
-                    d "..."
+                    n "..."
                     "meil ka savi, tõsiselt"
                     "meil on türa 13. juunini vaja ära teha, me oleksime midagi pannud siia texti mõttes aga meil on kiire, vot sulle su {i}easter egg{/i}."
                     return
@@ -67,46 +72,46 @@ label start:
     menu fopt:
         "Riietusruumi":
             scene cloth 
-            d "Sisened riietusruumi, võtad seljast õueriided ja riputad nad riietuspuu külge."
+            n "Sisened riietusruumi, võtad seljast õueriided ja riputad nad riietuspuu külge."
             scene fkorpo
             jump foptnew
         "2. korrusele":
-            d "ei tahagi üleriideid ära võtta? noh OK"
+            n "ei tahagi üleriideid ära võtta? noh OK"
             jump fIIfloor
         "Mine kooli automaati":
-            d "Kas sul on raha?"
+            n "Kas sul on raha?"
             menu money:
                 "Jah":
-                    d "Lähed masina juurde ja ostad endale midagi."
+                    n "Lähed masina juurde ja ostad endale midagi."
                     "Järsku läheneb sulle keegi."
                 "Ei":
-                    d "Lähete masina juurde ja ootate, kuni nad teile mõne toote jaoks vahetusraha annavad."
+                    n "Lähete masina juurde ja ootate, kuni nad teile mõne toote jaoks vahetusraha annavad."
                     "geenius."
                     "Näed kedagi masinale lähenemas ja ütled talle tere, lootes, et ta annab sulle raha."
         "Ma lähen istuma":
-            d "Sa istusid toolile."
+            n "Sa istusid toolile."
             "Olen kindel, et sa olid siia jõudmisest väga väsinud. Puhka natuke."
             menu rest:
                 "Puhkan veidi":
-                    d "Tõused püsti ja keegi läheneb sulle kohe"
+                    n "Tõused püsti ja keegi läheneb sulle kohe"
                 "...":
-                    d "Keegi läheneb sulle."
+                    n "Keegi läheneb sulle."
 
     menu foptnew:
         "2. korrusele":
             jump fIIfloor
         "Mine kooli automaati":
-            d "Kas sul on raha?"
+            n "Kas sul on raha?"
             menu moneynew:
                 "Jah":
-                    d "Lähed masina juurde ja ostad endale midagi."
+                    n "Lähed masina juurde ja ostad endale midagi."
                     "Järsku läheneb sulle keegi."
                 "Ei":
-                    d "Lähete masina juurde ja ootate, kuni nad teile mõne toote jaoks vahetusraha annavad."
+                    n "Lähete masina juurde ja ootate, kuni nad teile mõne toote jaoks vahetusraha annavad."
                     "geenius."
                     "Näed kedagi masinale lähenemas ja ütled talle tere, lootes, et ta annab sulle raha."
         "Ma lähen istuma":
-            d "Sa istusid toolile."
+            n "Sa istusid toolile."
             "Olen kindel, et sa olid siia jõudmisest väga väsinud. Puhka natuke."
             menu restnew:
                 "Puhkan veidi":
@@ -183,22 +188,22 @@ menu foptnewnew:
     "2. korrusele":
         jump fIIfloornew
     "Mine kooli automaati":
-        d "Kas sul on raha?"
+        n "Kas sul on raha?"
         menu moneynewnew:
             "Jah":
-                d "Lähed masina juurde ja ostad endale midagi."
+                n "Lähed masina juurde ja ostad endale midagi."
                 jump foptnewnew
             "Ei":
-                d "Lähete masina juurde ja ootate, kuni nad teile mõne toote jaoks vahetusraha annavad."
+                n "Lähete masina juurde ja ootate, kuni nad teile mõne toote jaoks vahetusraha annavad."
                 "geenius."
                 jump foptnewnew
     "Ma lähen istuma":
-        d "Sa istusid toolile."
+        n "Sa istusid toolile."
         "Olen kindel, et sa olid siia jõudmisest väga väsinud. Puhka natuke."
         menu restnewnew:
             "Puhkan veidi":
-                d "puhkad natuke."
-                d "mõne aja pärast tõused jälle püsti"
+                n "puhkad natuke."
+                n "mõne aja pärast tõused jälle püsti"
                 jump foptnewnew
 
             
@@ -220,8 +225,8 @@ label fIIfloornew:
 
 label WayLibrary:
     scene library
-    d "Oled raamatukogus."
-    d "Raamatukoguhoidja paneb sind tähele ja tuleb sinu juurde"
+    n "Oled raamatukogus."
+    n "Raamatukoguhoidja paneb sind tähele ja tuleb sinu juurde"
     show lib at center
     r "Tere!"
     m "Tere."
@@ -249,24 +254,24 @@ label WayLibrary:
 label EkorpusII:
     scene ekorpu
     "Niisiis, kus ma olen?"
-    d "Vaatad ringi ja näed E-tähte"
+    n "Vaatad ringi ja näed E-tähte"
     m "Olen vist E korpuses"
     "Tahtsin järsku tualetti minna. Loodan, et siia tuleb tualett."
-    d "Jalutad E-hoones ringi, et leida tualett."
+    n "Jalutad E-hoones ringi, et leida tualett."
     "Leidsid tualeti, sisenesid"
     "Ja läks välja"
     m "Oh, ja ma nägin seal laborit, tahtsin alati keemias katsetada"
-    d "Lähed laborisse, sisened sinna ja näed kohe vedelikega kolbe"
+    n "Lähed laborisse, sisened sinna ja näed kohe vedelikega kolbe"
     m "Vau, kolvid"
     "Huvitav, mis siis, kui ma need omavahel segan."
-    d "Huvitav, mis siis, kui ma need omavahel segan."
+    n "Huvitav, mis siis, kui ma need omavahel segan."
     m "Oh pagan, ma arvan, et mul on probleeme."
     "Seda ainult siis, kui"
     menu:
         "Peida":
-            d "Leiad suurepärase koha peitmiseks"
+            n "Leiad suurepärase koha peitmiseks"
             "Järsku tuleb keegi sisse. Sa ei saa aru, milline ta välja näeb, aga sa võid vaadata tema varju"
-            d "(sel hetkel peaks olema paus.)"
+            n "(sel hetkel peaks olema paus.)"
             m "Pheh, tundub, et ta on läinud"
             "Eei, see oleks minu jaoks ohtlik."
             d "Sa lahkusid laborist ja läksid esimesele korrusele."
