@@ -1,5 +1,14 @@
 # The script of the game goes in this file.
 
+init python:
+    i = 0
+    class Rating:
+        def __init__(self, rate):
+            self.rate = rate
+        
+        def score(rate):
+            i = 0
+            i += rate
 
 # character section
 define u = Character("???")
@@ -340,6 +349,7 @@ label MAD:
             n "Ta lahkus kontorist."
             m "See on minu võimalus olukorrast põgeneda."
             n "Lahkud kontorist ja lähed esimesele korrusele."
+            Rating.score(-1)
             jump EkorpusI
     
 label EkorpusI:
@@ -396,12 +406,14 @@ label EkorpusI:
                             m "Noh, mul on kõht täis. Tänan teid väga."
                             j "Jah. Nüüd palun mine ära, ma ei taha, et me mõlemad hätta jääme."
                             m "Olgu olgu. Edu"
+                            Rating.score(1)
                             jump FIP2
                         "Hästi":
                             j "See tähendab, et ma tegin täna hästi süüa."
                             n "Otsustasite selle kõik ära süüa."
                             m "Noh, mul on kõht täis. Ma lähen kaugemale, kuhu mu silmad mind viivad."
                             j "Jah. Ja kiiresti, ma ei taha jääda vahele, et lihtsalt kellelegi midagi valmistasin."
+                            Rating.score(1)
                             jump FIP2
                         "Оeh..":
                             j "Raiskasin salati koostisosad, mida keegi ei söö. Klass"
@@ -421,6 +433,7 @@ label BODI:
     "Ei, tead mida, tule köögist välja."
     m "Okei"
     n "Lahkusite, sest mõistsite, et kui jääte, tuleb siin tõsiseid jõukatsumisi."
+    Rating.score(-1)
 
 label FIP2:
     l "Aga me nägime teineteist jälle."
@@ -623,6 +636,7 @@ label waking:
     n "Sa läksid esimesele korrusele."
     n "Ta läks toolile magama"
     n "Ja sa otsustasid minna B-hoonesse"
+    Rating.score(-1)
     jump Bkorp
 
 label Bkorp:
@@ -647,12 +661,14 @@ label Bkorp:
                     m "Jah, mul on hea meel selle üle, et see soeng mulle sobib! Loodan, et teie jaoks läheb kõik hästi."
                     m "Hüvasti!"
                     u "Aitäh! Hüvasti"
+                    Rating.score(1)
                     jump LastChoice
                 "Pole paha":
                     u "Olgu, tänan, et nõustusite soenguga."
                     m "Palun ja aitäh, et lubasite mul juukseid lõigata."
                     m "Hüvasti!"
                     u "Palun! Hüvasti"
+                    Rating.score(1)
                     jump LastChoice
                 "D:":
                     u "Ou. Kas sulle ei meeldi su soeng?"
