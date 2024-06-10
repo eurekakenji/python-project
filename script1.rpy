@@ -3,14 +3,19 @@
 init python:
     i = 0
     class Rating:
-        def __init__(self, rate):
+        def __init__(self, rate, i):
             self.rate = rate
-        
-        def score(rate):
-            i = 0
-            i += rate
+            self.i = i
+
+        def score(self, rate):
+            self.i += rate
+            
+        def final_result(i):
+            return f"{self.i}"
 
 # character section
+init python:
+    rating = Rating(0,0)
 define u = Character("???")
 define un = Character("unknown")
 define s = Character("Sass")
@@ -20,7 +25,7 @@ define l = Character("Liia")
 define d = Character("Narrator")
 define b = Character("Raamatukoguhoidja")
 define r = Character("Richard")
-define n = Character ("Dan")
+define n = Character("Dan")
 
 #image section
 image Liiaidle = "Liiaidle.png"
@@ -349,7 +354,8 @@ label MAD:
             n "Ta lahkus kontorist."
             m "See on minu võimalus olukorrast põgeneda."
             n "Lahkud kontorist ja lähed esimesele korrusele."
-            Rating.score(-1)
+            init python:
+                Rating.score(-1)
             jump EkorpusI
     
 label EkorpusI:
@@ -406,14 +412,16 @@ label EkorpusI:
                             m "Noh, mul on kõht täis. Tänan teid väga."
                             j "Jah. Nüüd palun mine ära, ma ei taha, et me mõlemad hätta jääme."
                             m "Olgu olgu. Edu"
-                            Rating.score(1)
+                            init python:
+                                Rating.score(1)
                             jump FIP2
                         "Hästi":
                             j "See tähendab, et ma tegin täna hästi süüa."
                             n "Otsustasite selle kõik ära süüa."
                             m "Noh, mul on kõht täis. Ma lähen kaugemale, kuhu mu silmad mind viivad."
                             j "Jah. Ja kiiresti, ma ei taha jääda vahele, et lihtsalt kellelegi midagi valmistasin."
-                            Rating.score(1)
+                            init python:
+                                Rating.score(1)
                             jump FIP2
                         "Оeh..":
                             j "Raiskasin salati koostisosad, mida keegi ei söö. Klass"
@@ -433,7 +441,8 @@ label BODI:
     "Ei, tead mida, tule köögist välja."
     m "Okei"
     n "Lahkusite, sest mõistsite, et kui jääte, tuleb siin tõsiseid jõukatsumisi."
-    Rating.score(-1)
+    init python:
+        Rating.score(-1)
 
 label FIP2:
     l "Aga me nägime teineteist jälle."
@@ -494,7 +503,6 @@ label sport:
     m "Niisiis. Ta ütles mulle, et pärast D-hoonesse sisenemist pidin selle koridori lõpus paremale pöörama."
     m "Nagu ma aru saan, on see jõusaal."
     n "Enne kui jõuad siseneda, maandub pall sulle pähe."
-    # Siin on üks tegelane, kas Dan või Sass või Jeremy
     u "Oih, vabandust"
     m "Mul ei olnud aega sisse tulla ja mul oli juba peavigastus."
     u "No, kurat, see pole minu süü, et ma ei saa tulevikku vaadata ega näe sind palliga pähe löömas."
@@ -636,7 +644,8 @@ label waking:
     n "Sa läksid esimesele korrusele."
     n "Ta läks toolile magama"
     n "Ja sa otsustasid minna B-hoonesse"
-    Rating.score(-1)
+    init python:
+        Rating.score(-1)
     jump Bkorp
 
 label Bkorp:
@@ -661,14 +670,16 @@ label Bkorp:
                     m "Jah, mul on hea meel selle üle, et see soeng mulle sobib! Loodan, et teie jaoks läheb kõik hästi."
                     m "Hüvasti!"
                     u "Aitäh! Hüvasti"
-                    Rating.score(1)
+                    init python:
+                        Rating.score(1)
                     jump LastChoice
                 "Pole paha":
                     u "Olgu, tänan, et nõustusite soenguga."
                     m "Palun ja aitäh, et lubasite mul juukseid lõigata."
                     m "Hüvasti!"
                     u "Palun! Hüvasti"
-                    Rating.score(1)
+                    init python:
+                        Rating.score(1)
                     jump LastChoice
                 "D:":
                     u "Ou. Kas sulle ei meeldi su soeng?"
@@ -727,5 +738,42 @@ label Conclusion:
     d "Kõik"
     d "Selle mängu lugu on läbi"
     d "Loodan, et teile meeldis see, mida me selle aja jooksul tegime"
+    d "Muide, kogu mängu jooksul teenisite austust."
+    d "Ja teie austus on ..."
+    init python:
+        rating.final()
+    if rating.final() == -6:
+        jump BadEnding
+    elif -6 < rating.final() < 6:
+        jump NeutralEnding
+    elif rating.final() == 6:
+        jump GoodEnding
+label BadEnding:
+    d "Vau, sa oled mürgine!"
+    d "kuna sa solvasid kõiki, ei taha keegi sind isegi näha."
+    d "Sa mõistsid seda kohe ja otsustasid seetõttu sinna mitte minna."
+    d "Ja ma arvan, et sinust saab mingi korrapidaja."
+    d "Valige paremad vastused."
+    d "Aitäh mängimast!"
+    return
+
+label NeutralEnding:
+    d "Otsustasite sinna minna."
+    d "Teile on määratud sisseastumiseksam ja vestlus."
+    d "Tulid sel ajal."
+    d "Kirjutasite sisseastumiseksami ja sooritasite intervjuud ja..."
+    d "Sa ei suutnud."
+    d "Otsustasite oma arengu nimel õhtukooli minna."
+    d "Kuid teil on vedanud, et olete teistega sõbraks saanud ja seetõttu suhtlete nendega."
+    d "Aitäh mängimast!"
+    return
+
+label GoodEnding:
+    d "Palju õnne!"
+    d "Olete otsustanud IVKHK-ga liituda pärast sisseastumiseksami ja vestluse sooritamist!"
+    d "Arvasite, et sõpru on raske leida, kuid eksite."
+    d "Kuna sa said seal sõpru juba enne, kui siia sisenesid."
+    d "Ja ma õnnitlen teid, et suutsite saavutada teatud hinnangu ja saada hea lõpu!"
+    d "Jah..."
     d "Aitäh mängimast!"
     return
