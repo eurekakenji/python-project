@@ -343,6 +343,10 @@ label MAD:
                 Rating.score(1)
             jump EkorpusI
         "...":
+            d "Sa ei vasta mulle"
+            d "Sind pole mõtet siin hoida, mine."
+            d "Aga kui ma sind näen, jääd sa hätta."
+            n "Lahkusite laborist ja läksite E korpuse 1. korrusele."
         "Valeta":
             m "Mu ülemus palus mul kolvid tuua"
             d "Ja ma usun seda?"
