@@ -1,19 +1,5 @@
-init python:
-    i = 0
-    class Rating:
-        def __init__(self, rate, i):
-            self.rate = rate
-            self.i = i
+default gen_rating = 0
 
-        def score(self, rate):
-            self.i += rate
-            
-        def final_result(i):
-            return f"{self.i}"
-
-# character section
-init python:
-    rating = Rating(0,0)
 define u = Character("???")
 define un = Character("unknown")
 define s = Character("Sass")
@@ -53,7 +39,9 @@ image Ririhappy = "Ririhappy.png"
 image Ririidle = "Ririidle.png"
 image Ririmad = "Ririmad.png"
 label start:
+
     scene ent
+
     menu:
         "*Sisenen F korpusesse*":
             n "Sisened F korpusesse"
@@ -338,8 +326,7 @@ label MAD:
             hide Danidle
             hide Dansmile
             hide Dand
-            init python:
-                Rating.score(1)
+            gen_rating += 1
             jump EkorpusI
         "...":
             d "Sa ei vasta mulle"
@@ -359,8 +346,7 @@ label MAD:
             n "Lahkud kontorist ja lähed esimesele korrusele."
             hide Danidle
             hide Dand
-            init python:
-                Rating.score(-1)
+            gen_rating -= 1
             jump EkorpusI
     
 label EkorpusI:
@@ -425,8 +411,7 @@ label EkorpusI:
                             hide Jidle
                             hide Jsmile
                             hide Jfrown
-                            init python:
-                                Rating.score(1)
+                            gen_rating += 1
                             jump FIP2
                         "Hästi":
                             j "See tähendab, et ma tegin täna hästi süüa."
@@ -457,8 +442,7 @@ label BODI:
     n "Lahkusite, sest mõistsite, et kui jääte, tuleb siin tõsiseid jõukatsumisi."
     hide Jidle
     hide Jfrown
-    init python:
-        Rating.score(-1)
+    gen_rating -= 1
 
 label FIP2:
     l "Aga me nägime teineteist jälle."
@@ -546,12 +530,10 @@ label sport:
     menu flex:
         "Sa ei mänginud halvasti":
             u "Aitah!"
-            init python:
-                Rating.score(1)
+            gen_rating += 1
         "Ma olin sinust parem":
             u "Mees, meil on viik."
-            init python:
-                Rating.score(-1)
+            gen_rating -= 1
     u "Noh. See oli lahe"
     m "Nõus. Olgu, ma lähen C hoonesse"
     u "Okei näeme"
@@ -684,8 +666,7 @@ label waking:
     hide Ksleep
     hide Ksmile
     hide Kidle
-    init python:
-        Rating.score(-1)
+    gen_rating -= 1
     jump Bkorp
 
 label Bkorp:
@@ -716,8 +697,7 @@ label Bkorp:
                     r2 "Aitäh! Hüvasti"
                     hide Ririidle
                     hide Rirismile
-                    init python:
-                        Rating.score(1)
+                    gen_rating += 1
                     jump LastChoice
                 "Pole paha":
                     r2 "Olgu, tänan, et nõustusite soenguga."
@@ -726,8 +706,7 @@ label Bkorp:
                     r2 "Palun! Hüvasti"
                     hide Ririidle
                     hide Rirismile
-                    init python:
-                        Rating.score(1)
+                    gen_rating += 1
                     jump LastChoice
                 "D:":
                     r2 "Ou. Kas sulle ei meeldi su soeng?"
@@ -745,8 +724,7 @@ label Bkorp:
             n "Ta läheb oma kontorisse."
             hide Ririidle
             hide Ririmad
-            init python:
-                Rating.score(-1)
+            gen_rating -= 1
             jump LastChoice
 
 label LastChoice:
@@ -800,13 +778,11 @@ label Conclusion:
     n "Loodan, et teile meeldis see, mida me selle aja jooksul tegime"
     n "Muide, kogu mängu jooksul teenisite austust."
     n "Ja teie austus on ..."
-    init python:
-        rating.final()
-    if rating.final() == -5:
+    if gen_rating == -5:
         jump BadEnding
-    elif -5 < rating.final() < 4:
+    elif -5 < gen_rating < 4:
         jump NeutralEnding
-    elif rating.final() == 4:
+    elif gen_rating == 4:
         jump GoodEnding
 label BadEnding:
     n "Vau, sa oled mürgine!"
