@@ -1,4 +1,3 @@
-# The script of the game goes in this file.
 
 init python:
     i = 0
@@ -22,14 +21,13 @@ define s = Character("Sass")
 define m = Character("Main")
 define j = Character("Jeremy")
 define l = Character("Liia")
-define d = Character("Narrator")
+define n = Character("Narrator")
 define b = Character("Raamatukoguhoidja")
 define r1 = Character("Richard")
-define n = Character("Dan")
+define d = Character("Dan")
 define k = Character("KD")
 define r2 = Character("Riri")
 
-#image section
 image Liiaidle = "Liiaidle.png"
 image Liiasmirk = "Liiasmirk.png"
 image Liiafrown = "Liiafrown.png"
@@ -48,93 +46,84 @@ image Dand = "Dandisappointed"
 image Libidle = "Libidle.png"
 image Libsmirk = "Libsmirk.png"
 image Libd = "Libdisappointed.png"
-
-
-# The game starts here.
-
+image Kidle = "Kidle.png"
+image Ksleep = "Ksleep.png"
+image Ksmile = "Ksmile.png"
+image Kwtf = "Kwtf.png"
+image Ririhappy = "Ririhappy.png"
+image Ririsad = "Ririsad.png"
+image Ririmad = "Ririmad.png"
 label start:
-
-    # Show a background. This uses a placeholder by default, but you can
-    # add a file (named either "bg room.png" or "bg room.jpg") to the
-    # images directory to show it.
-
     scene ent
-
-    # This shows a character sprite. A placeholder is used, but you can
-    # replace it by adding a file named "eileen happy.png" to the images
-    # directory.
-    # Dialouges yippe!
-    d "Ilus koolipäev, eks?"
-    # These display lines of dialogue.
     menu:
         "*Sisenen F korpusesse*":
-            d "Sisened F korpusesse"
+            n "Sisened F korpusesse"
         "*Pööran ümber ja lähen koju*":
-            d "..."
-            d "Vau"
-            d "Lihtsalt vau"
-            d "ehk sina tea, et kui sa lihtsalt keerad perse ukse poole ja sihkertad koju tagasi, et mängu ei toimu ju?"
+            n "..."
+            n "Vau"
+            n "Lihtsalt vau"
+            n "ehk sina tea, et kui sa lihtsalt keerad perse ukse poole ja sihkertad koju tagasi, et mängu ei toimu ju?"
             menu:
                 "Tõsiselt? Oih.":
-                    d "vot. {i}ahem{/i},"
-                    d "Sisened F korpusesse"
+                    n "vot. {i}ahem{/i},"
+                    n "Sisened F korpusesse"
                 "Mul savi":
-                    d "..."
-                    d "meil ka savi, tõsiselt"
-                    d "meil on türa 13. juunini vaja ära teha, me oleksime midagi pannud siia texti mõttes aga meil on kiire, vot sulle su {i}easter egg{/i}."
+                    n "..."
+                    n "meil ka savi, tõsiselt"
+                    n "meil on türa 13. juunini vaja ära teha, me oleksime midagi pannud siia texti mõttes aga meil on kiire, vot sulle su {i}easter egg{/i}."
                     return
     scene fkorpo
-    d "Olete F korpuses."
-    d "Vasakul pool on riietusruum, sirge trepp teisele korrusele ja kuulipilduja, paremal toolid. Kuhu sa esimesena lähed?"
+    n "Olete F korpuses."
+    n "Vasakul pool on riietusruum, sirge trepp teisele korrusele ja kuulipilduja, paremal toolid. Kuhu sa esimesena lähed?"
     menu fopt:
         "Riietusruumi":
             scene cloth 
-            d "Sisened riietusruumi, võtad seljast õueriided ja riputad nad riietuspuu külge."
+            n "Sisened riietusruumi, võtad seljast õueriided ja riputad nad riietuspuu külge."
             scene fkorpo
             jump foptnew
         "2. korrusele":
-            d "ei tahagi üleriideid ära võtta? noh OK"
+            n "ei tahagi üleriideid ära võtta? noh OK"
             jump fIIfloor
         "Mine kooli automaati":
-            d "Kas sul on raha?"
+            n "Kas sul on raha?"
             menu money:
                 "Jah":
-                    d "Lähed masina juurde ja ostad endale midagi."
-                    d "Järsku läheneb sulle keegi."
+                    n "Lähed masina juurde ja ostad endale midagi."
+                    n "Järsku läheneb sulle keegi."
                 "Ei":
-                    d "Lähete masina juurde ja ootate, kuni nad teile mõne toote jaoks vahetusraha annavad."
-                    d "geenius."
-                    d "Näed kedagi masinale lähenemas ja ütled talle tere, lootes, et ta annab sulle raha."
+                    n "Lähete masina juurde ja ootate, kuni nad teile mõne toote jaoks vahetusraha annavad."
+                    n "geenius."
+                    n "Näed kedagi masinale lähenemas ja ütled talle tere, lootes, et ta annab sulle raha."
         "Ma lähen istuma":
-            d "Sa istusid toolile."
-            d "Olen kindel, et sa olid siia jõudmisest väga väsinud. Puhka natuke."
+            n "Sa istusid toolile."
+            n "Olen kindel, et sa olid siia jõudmisest väga väsinud. Puhka natuke."
             menu rest:
                 "Puhkan veidi":
-                    d "Tõused püsti ja keegi läheneb sulle kohe"
+                    n "Tõused püsti ja keegi läheneb sulle kohe"
                 "...":
-                    d "Keegi läheneb sulle."
+                    n "Keegi läheneb sulle."
 
     menu foptnew:
         "2. korrusele":
             jump fIIfloor
         "Mine kooli automaati":
-            d "Kas sul on raha?"
+            n "Kas sul on raha?"
             menu moneynew:
                 "Jah":
-                    d "Lähed masina juurde ja ostad endale midagi."
-                    d "Järsku läheneb sulle keegi."
+                    n "Lähed masina juurde ja ostad endale midagi."
+                    n "Järsku läheneb sulle keegi."
                 "Ei":
-                    d "Lähete masina juurde ja ootate, kuni nad teile mõne toote jaoks vahetusraha annavad."
-                    d "geenius."
-                    d "Näed kedagi masinale lähenemas ja ütled talle tere, lootes, et ta annab sulle raha."
+                    n "Lähete masina juurde ja ootate, kuni nad teile mõne toote jaoks vahetusraha annavad."
+                    n "geenius."
+                    n "Näed kedagi masinale lähenemas ja ütled talle tere, lootes, et ta annab sulle raha."
         "Ma lähen istuma":
-            d "Sa istusid toolile."
-            d "Olen kindel, et sa olid siia jõudmisest väga väsinud. Puhka natuke."
+            n "Sa istusid toolile."
+            n "Olen kindel, et sa olid siia jõudmisest väga väsinud. Puhka natuke."
             menu restnew:
                 "Puhkan veidi":
-                    d "Tõused püsti ja keegi läheneb sulle kohe"
+                    n "Tõused püsti ja keegi läheneb sulle kohe"
                 "...":
-                    d "Keegi läheneb sulle."
+                    n "Keegi läheneb sulle."
 
 
 label fIIfloor:
@@ -309,7 +298,7 @@ label EkorpusII:
         "Sulgege kontor":
             m "Oh ma tean, ma panen kontori kinni"
             d "Paned kontori ukse kinni."
-            t "Oeh olgu. Ma ei sulgenud seda kontorit, kuidas see suleti?"
+            u "Oeh olgu. Ma ei sulgenud seda kontorit, kuidas see suleti?"
             "Ja mul pole võtit. Kurat, ma pean võtme järele tagasi minema."
             m "Kas ta on lahkunud?"
             ".... omamoodi jah"
@@ -317,21 +306,24 @@ label EkorpusII:
             jump EkorpusI
         "Mõtle":
             m "Kurat, mida ma peaksin tegema..."
-            d "Ta astub laborisse ja märkab sind"
+            n "Ta astub laborisse ja märkab sind"
             jump MAD
 
 label MAD:
     show Dand at center
-    d "Kes sa oled?"
+    u "Kes sa oled?"
     m "Emmm"
-    d "Ma küsin, kes sa oled?"
+    u "Ma küsin, kes sa oled?"
     m "Ma?"
-    d "Ära ole rumal, ma ei näe kedagi peale sinu"
+    u "Ära ole rumal, ma ei näe kedagi peale sinu"
     m "Minu nimi on...."
     "Peter Griffin"
-    d "..."
+    show Dansmile at center
+    u "..."
     m "Andrei Vorobjov.."
+    show Dand at center
     d "See on teine ​​teema."
+    d "Muide, minu nimi on Dan, nii et te ei esita küsimusi."
     "Selgitage, miks te siin olete ja miks tahtsite kolvid võtta?"
     menu:
         "Räägi tõtt":
@@ -344,6 +336,8 @@ label MAD:
             m "Mida sa silmas pead?"
             d "Jumal küll, kui tahad midagi teha, aga küsi enne minult, sest ma ei saa kedagi üksi jätta järelevalveta."
             d "Palun tule nüüd laborist välja."
+            init python:
+                Rating.score(1)
             jump EkorpusI
         "Valeta":
             m "Mu ülemus palus mul kolvid tuua"
