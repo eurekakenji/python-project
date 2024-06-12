@@ -336,9 +336,13 @@ label MAD:
             m "Mida sa silmas pead?"
             d "Jumal küll, kui tahad midagi teha, aga küsi enne minult, sest ma ei saa kedagi üksi jätta järelevalveta."
             d "Palun tule nüüd laborist välja."
+            hide Danidle
+            hide Dansmile
+            hide Dand
             init python:
                 Rating.score(1)
             jump EkorpusI
+        "...":
         "Valeta":
             m "Mu ülemus palus mul kolvid tuua"
             d "Ja ma usun seda?"
@@ -350,6 +354,8 @@ label MAD:
             n "Ta lahkus kontorist."
             m "See on minu võimalus olukorrast põgeneda."
             n "Lahkud kontorist ja lähed esimesele korrusele."
+            hide Danidle
+            hide Dand
             init python:
                 Rating.score(-1)
             jump EkorpusI
@@ -687,7 +693,7 @@ label Bkorp:
         "Lõikasin hiljuti oma juukseid":
             u "Olgu, tänan vastamast."
             m "Palun"
-            d "Ta läheb oma kontorisse."
+            n "Ta läheb oma kontorisse."
             jump LastChoice
 
 label LastChoice:
@@ -700,20 +706,20 @@ label LastChoice:
             jump Conclusion
         "Väljuda C-korpuse kaudu.":
             m "Olgu, ma lähen"
-            d "Olete tagasi C-korpuses"
-            d "Nägid 'Tegelase nime' jälle toolil magamas"
-            d "Kuid sa otsustasid teda mitte äratada, sa ei tea kunagi, mida ta sinuga teeb."
-            d "Kõndisid edasi, kuni nägid ust tänavale."
-            d "Sa läksid hoonest C välja."
+            n "Olete tagasi C-korpuses"
+            n "Nägid 'Tegelase nime' jälle toolil magamas"
+            n "Kuid sa otsustasid teda mitte äratada, sa ei tea kunagi, mida ta sinuga teeb."
+            n "Kõndisid edasi, kuni nägid ust tänavale."
+            n "Sa läksid hoonest C välja."
             jump Conclusion
         "Väljuda F-korpuse kaudu.":
             m "Olgu, ma lähen"
-            d "Olete tagasi F-korpuses"
-            d "Nägid 'Tegelase nime' jälle toolil magamas"
-            d "Kuid sa otsustasid teda mitte äratada, sa ei tea kunagi, mida ta sinuga teeb."
-            d "Kõndisid edasi, kuni nägid ust tänavale."
-            d "Olete jõudnud F koprusse."
-            d "Liia kohtus sinuga"
+            n "Olete tagasi F-korpuses"
+            n "Nägid 'Tegelase nime' jälle toolil magamas"
+            n "Kuid sa otsustasid teda mitte äratada, sa ei tea kunagi, mida ta sinuga teeb."
+            n "Kõndisid edasi, kuni nägid ust tänavale."
+            n "Olete jõudnud F koprusse."
+            n "Liia kohtus sinuga"
             l "Tere jälle"
             m "Ku"
             l "Kuidas C-hoones on?"
@@ -723,19 +729,19 @@ label LastChoice:
             l "Ei"
             m "Hästi. Ma lähen siis koju. Edu"
             l "Jah, sama sulle"
-            d "Sa läksid majast F välja."
+            n "Sa läksid majast F välja."
             jump Conclusion
 
 label Conclusion:
     scene ent
-    d "Olete nüüd tänaval"
-    d "Ja lähed südamerahuga koju"
+    n "Olete nüüd tänaval"
+    n "Ja lähed südamerahuga koju"
     scene end
-    d "Kõik"
-    d "Selle mängu lugu on läbi"
-    d "Loodan, et teile meeldis see, mida me selle aja jooksul tegime"
-    d "Muide, kogu mängu jooksul teenisite austust."
-    d "Ja teie austus on ..."
+    n "Kõik"
+    n "Selle mängu lugu on läbi"
+    n "Loodan, et teile meeldis see, mida me selle aja jooksul tegime"
+    n "Muide, kogu mängu jooksul teenisite austust."
+    n "Ja teie austus on ..."
     init python:
         rating.final()
     if rating.final() == -6:
@@ -745,31 +751,31 @@ label Conclusion:
     elif rating.final() == 6:
         jump GoodEnding
 label BadEnding:
-    d "Vau, sa oled mürgine!"
-    d "kuna sa solvasid kõiki, ei taha keegi sind isegi näha."
-    d "Sa mõistsid seda kohe ja otsustasid seetõttu sinna mitte minna."
-    d "Ja ma arvan, et sinust saab mingi korrapidaja."
-    d "Valige paremad vastused."
-    d "Aitäh mängimast!"
+    n "Vau, sa oled mürgine!"
+    n "kuna sa solvasid kõiki, ei taha keegi sind isegi näha."
+    n "Sa mõistsid seda kohe ja otsustasid seetõttu sinna mitte minna."
+    n "Ja ma arvan, et sinust saab mingi korrapidaja."
+    n "Valige paremad vastused."
+    n "Aitäh mängimast!"
     return
 
 label NeutralEnding:
-    d "Otsustasite sinna minna."
-    d "Teile on määratud sisseastumiseksam ja vestlus."
-    d "Tulid sel ajal."
-    d "Kirjutasite sisseastumiseksami ja sooritasite intervjuud ja..."
-    d "Sa ei suutnud."
-    d "Otsustasite oma arengu nimel õhtukooli minna."
-    d "Kuid teil on vedanud, et olete teistega sõbraks saanud ja seetõttu suhtlete nendega."
-    d "Aitäh mängimast!"
+    n "Otsustasite sinna minna."
+    n "Teile on määratud sisseastumiseksam ja vestlus."
+    n "Tulid sel ajal."
+    n "Kirjutasite sisseastumiseksami ja sooritasite intervjuud ja..."
+    n "Sa ei suutnud."
+    n "Otsustasite oma arengu nimel õhtukooli minna."
+    n "Kuid teil on vedanud, et olete teistega sõbraks saanud ja seetõttu suhtlete nendega."
+    n "Aitäh mängimast!"
     return
 
 label GoodEnding:
-    d "Palju õnne!"
-    d "Olete otsustanud IVKHK-ga liituda pärast sisseastumiseksami ja vestluse sooritamist!"
-    d "Arvasite, et sõpru on raske leida, kuid eksite."
-    d "Kuna sa said seal sõpru juba enne, kui siia sisenesid."
-    d "Ja ma õnnitlen teid, et suutsite saavutada teatud hinnangu ja saada hea lõpu!"
-    d "Jah..."
-    d "Aitäh mängimast!"
+    n "Palju õnne!"
+    n "Olete otsustanud IVKHK-ga liituda pärast sisseastumiseksami ja vestluse sooritamist!"
+    n "Arvasite, et sõpru on raske leida, kuid eksite."
+    n "Kuna sa said seal sõpru juba enne, kui siia sisenesid."
+    n "Ja ma õnnitlen teid, et suutsite saavutada teatud hinnangu ja saada hea lõpu!"
+    n "Jah..."
+    n "Aitäh mängimast!"
     return
