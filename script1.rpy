@@ -1,4 +1,3 @@
-
 init python:
     i = 0
     class Rating:
@@ -51,7 +50,7 @@ image Ksleep = "Ksleep.png"
 image Ksmile = "Ksmile.png"
 image Kwtf = "Kwtf.png"
 image Ririhappy = "Ririhappy.png"
-image Ririsad = "Ririsad.png"
+image Ririidle = "Ririidle.png"
 image Ririmad = "Ririmad.png"
 label start:
     scene ent
@@ -373,28 +372,31 @@ label EkorpusI:
     "Otsustasite kontoris ringi vaadata ja saite aru, et see on köök."
     m "Jama. Selle aja jooksul jõudsin nälga jääda."
     m "Ma lähen valmistan endale midagi."
-    j "Mitte minu nugadega."
+    show Jidle at center
+    u "Mitte minu nugadega."
     menu TINIBDD:
         "Kes...":
             m "Kes sa oled ja kuidas sa siia sattusid?"
-            j "Loogiliselt võttes peaksin sinult küsima."
+            u "Loogiliselt võttes peaksin sinult küsima."
             m "See ei tohiks teid muretseda."
         "Olgu...":
             m "Olgu, ma teen endale snäki."
-            j "Tundub, et sind ei huvita tõsiasi, et ma siin seisan."
+            u "Tundub, et sind ei huvita tõsiasi, et ma siin seisan."
             m "Mind ei huvita."
     m "Ma olen tegelikult näljane."
-    j "Noh... sa näed välja nagu TikToker, kes juhib süüdistust, et paks olemine on 'keha positiivne' ja et 'väidetavalt' sööte ainult tervislikku toitu."
-    "Kui tahad normaalselt süüa ja gastriiti mitte haigestuda, siis saan aidata ühe roa retseptiga."
+    show Jfrown at centre
+    u "Noh... sa näed välja nagu TikToker, kes juhib süüdistust, et paks olemine on 'keha positiivne' ja et 'väidetavalt' sööte ainult tervislikku toitu."
+    u "Kui tahad normaalselt süüa ja gastriiti mitte haigestuda, siis saan aidata ühe roa retseptiga."
+    j "Ma ei tea, kas sa küsisid, aga minu nimi on Jeremy"
     menu Food:
         "Olgu, ma kuulan":
             j "Mul on üks retsept."
-            "See roog saab olema Kreeka salat."
-            "See valmib väga kiiresti, seega piisab 5-10 minutist."
+            j "See roog saab olema Kreeka salat."
+            j "See valmib väga kiiresti, seega piisab 5-10 minutist."
             menu Salad:
                 "Ma üritan.":
                     j "Niisiis."
-                    "Tomatid..."
+                    j "Tomatid..."
                     n "Ta lõikab tomatid tükkideks."
                     j "Kurgid...."
                     n "Ta lõikab kurgi kolmnurkadeks."
@@ -413,11 +415,16 @@ label EkorpusI:
                     j "Noh? Kuidas salatiga läheb?"
                     menu taste:
                         "Nii maitsev.":
+                            show Jsmile at centre
                             j "Ma ütlesin sulle, et mulle meeldiks"
                             n "Sõid oma salati südamerahus ära."
                             m "Noh, mul on kõht täis. Tänan teid väga."
+                            show Jidle at center
                             j "Jah. Nüüd palun mine ära, ma ei taha, et me mõlemad hätta jääme."
                             m "Olgu olgu. Edu"
+                            hide Jidle
+                            hide Jsmile
+                            hide Jfrown
                             init python:
                                 Rating.score(1)
                             jump FIP2
@@ -426,10 +433,11 @@ label EkorpusI:
                             n "Otsustasite selle kõik ära süüa."
                             m "Noh, mul on kõht täis. Ma lähen kaugemale, kuhu mu silmad mind viivad."
                             j "Jah. Ja kiiresti, ma ei taha jääda vahele, et lihtsalt kellelegi midagi valmistasin."
-                            init python:
-                                Rating.score(1)
+                            hide Jidle
+                            hide Jfrown
                             jump FIP2
                         "Оeh..":
+                            show Jfrown at center
                             j "Raiskasin salati koostisosad, mida keegi ei söö. Klass"
                             m "Vau, ära pane pahaks."
                             j "No muidugi, Body Positive'ile salateid ei meeldi."
@@ -447,6 +455,8 @@ label BODI:
     "Ei, tead mida, tule köögist välja."
     m "Okei"
     n "Lahkusite, sest mõistsite, et kui jääte, tuleb siin tõsiseid jõukatsumisi."
+    hide Jidle
+    hide Jfrown
     init python:
         Rating.score(-1)
 
@@ -533,6 +543,15 @@ label sport:
     u "Jah, ma panin selle 10 minutiks"
     m "Oh. Muide, meil on viik"
     u "Ma tean, ma tean"
+    menu flex:
+        "Sa ei mänginud halvasti":
+            u "Aitah!"
+            init python:
+                Rating.score(1)
+        "Ma olin sinust parem":
+            u "Mees, meil on viik."
+            init python:
+                Rating.score(-1)
     u "Noh. See oli lahe"
     m "Nõus. Olgu, ma lähen C hoonesse"
     u "Okei näeme"
@@ -599,13 +618,15 @@ label moretalking:
 label sleepy:
     n "Olete sisenenud hoone C koridori."
     n "Ja sa kuulsid kohe, et keegi magas."
-    u "*Norskab*"
+    show Ksleep at center
+    un "*Norskab*"
     m "Oh, ta magab, ma arvan, et oleks hea mõte ta üles äratada"
     menu WAKEUP:
         "Ärata ta üles":
             jump waking
         "Jäta ta rahule":
             m "Olgu, ma lähen mööda."
+            hide Ksleep
             n "Otsustate minna teisele korrusele."
             n "Teisel korrusel näete rohkem kappe ja otomaneid"
             m "Okei.. ma lähen siis kolmanda juurde"
@@ -620,36 +641,49 @@ label waking:
     m "oh ärka üles"
     "..."
     m "TERE, NAD HELISTAVAT TEIE JÄRELE!!!"
+    show Kwtf at center
     u "Oh! Kurat MIKS karjuda??"
+    show Kidle at center
     u "mida sul vaja on?"
     m "Tere. Miks sa siin üldse magasid?"
     u "Ma tahan magada, sellepärast"
     u "Ma töötasin 3 päeva järjest ilma magamata ühe programmi, ÜHE jaoks"
     m "oh see on nõme"
+    m "Mis su nimi on?"
+    u "ja sellepärast sa mind äratasid?"
+    k "..KD"
     m "Kuule, kas sa tead, mis on 2. ja 3. korrusel?"
-    u "Ja sellepärast sa mind äratasid?"
-    u "...jumal"
+    show Kwtf at center
+    k "...jumal"
     n "Sa läksid teisele korrusele"
-    u "Lühidalt, te ei leia midagi peale ottomanide, pingid ja kapid"
-    u "Kuigi seal on üks huvitav kontor, kus töölauad pole nagu teistes kontorites."
+    show Kidle at center
+    k "Lühidalt, te ei leia midagi peale ottomanide, pingid ja kapid"
+    k "Kuigi seal on üks huvitav kontor, kus töölauad pole nagu teistes kontorites."
     m "See on selge"
     m "Lähme siis kolmandale korrusele?"
-    u "Ja kas sa arvad tõsiselt, et kolmandal korrusel tuleb midagi teistmoodi?"
-    u "Ei. Parem näitan teile esimest korrust"
+    show Kwtf at center
+    k "Ja kas sa arvad tõsiselt, et kolmandal korrusel tuleb midagi teistmoodi?"
+    k "Ei. Parem näitan teile esimest korrust"
     m "Kus see on?"
-    u "Kas sa küsisid seda tõsiselt? Kas teil pole isegi aimu, kus see olla võib?"
+    k "Kas sa küsisid seda tõsiselt? Kas teil pole isegi aimu, kus see olla võib?"
     m "ok ok, loll küsimus"
     n "Te lähete alla 0. korrusele"
-    u "Ja siin on lauatenniselaud"
-    u "Nad ei anna sulle reketeid ega tennisepalle."
-    u "Kuigi kui teil on see, mida ma loetlesin, siis saame mängida ühe mängu."
+    k "Ja siin on lauatenniselaud"
+    k "Nad ei anna sulle reketeid ega tennisepalle."
+    k "Kuigi kui teil on see, mida ma loetlesin, siis saame mängida ühe mängu."
     m "Kahjuks mul neid esemeid pole."
-    u "Noh, see tähendab, et ma lähen uuesti magama."
+    show Ksmile at center
+    k "Noh, see tähendab, et ma lähen uuesti magama."
     m "Oh, aitäh, et vähemalt keha ennast näitasid."
-    u "Peaasi, et mind üles ärataks."
+    show Kidle at center
+    k "Peaasi, et mind üles ärataks."
     n "Sa läksid esimesele korrusele."
     n "Ta läks toolile magama"
     n "Ja sa otsustasid minna B-hoonesse"
+    hide Kwtf
+    hide Ksleep
+    hide Ksmile
+    hide Kidle
     init python:
         Rating.score(-1)
     jump Bkorp
@@ -658,46 +692,61 @@ label Bkorp:
     n "Jõudsite B-hoone juurde ja saite kohe aru, kui kitsas see on võrreldes teiste hoonetega."
     n "Sa kõndisid parukate kontorist mööda."
     n "Ja keegi jooksis kohe teie juurde."
+    show Ririidle at center
     u "Tere, kas soovite oma juukseid meie juures lõigata?"
-    m "Tere, miks?"
-    u "Meil on praegu lihtsalt praktika ja me vajame inimesi."
+    m "Tere, kes see on ja miks?"
+    r2 "Minu nimi on Riri. Meil on praegu lihtsalt praktika ja me vajame inimesi."
     menu hair:
         "Jah, ma saan":
-            u "Suurepärane! Siis järgi mind"
+            show Rirismile at center
+            r2 "Suurepärane! Siis järgi mind"
             n "Sa järgnesid talle tema kabinetti"
-            u "Võta istet."
+            show Ririidle at center
+            r2 "Võta istet."
             n "Istusid maha ja nad hakkavad juba su juukseid lõikama."
             n "Sa naudid seda hetke, et jääd peaaegu magama!"
             n "20 minutit on möödas"
-            u "Noh, kuidas sulle su uus soeng meeldib?"
+            r2 "Noh, kuidas sulle su uus soeng meeldib?"
             menu newhair:
                 "ja see sobib mulle!":
-                    u "Suurepärane, tänan, et nõustusite soenguga."
+                    show Rirismile at center
+                    r2 "Suurepärane, tänan, et nõustusite soenguga."
                     m "Jah, mul on hea meel selle üle, et see soeng mulle sobib! Loodan, et teie jaoks läheb kõik hästi."
                     m "Hüvasti!"
-                    u "Aitäh! Hüvasti"
+                    r2 "Aitäh! Hüvasti"
+                    hide Ririidle
+                    hide Rirismile
                     init python:
                         Rating.score(1)
                     jump LastChoice
                 "Pole paha":
-                    u "Olgu, tänan, et nõustusite soenguga."
+                    r2 "Olgu, tänan, et nõustusite soenguga."
                     m "Palun ja aitäh, et lubasite mul juukseid lõigata."
                     m "Hüvasti!"
-                    u "Palun! Hüvasti"
+                    r2 "Palun! Hüvasti"
+                    hide Ririidle
+                    hide Rirismile
                     init python:
                         Rating.score(1)
                     jump LastChoice
                 "D:":
-                    u "Ou. Kas sulle ei meeldi su soeng?"
+                    r2 "Ou. Kas sulle ei meeldi su soeng?"
                     m "Ei."
-                    u "Meil on väga kahju, et rikkusime teie soengu ära."
+                    r2 "Meil on väga kahju, et rikkusime teie soengu ära."
                     m "Mitte midagi. Ma lähen, hüvasti."
-                    u "Hüvasti"
+                    r2 "Hüvasti"
+                    hide Ririidle
+                    hide Rirismile
                     jump LastChoice
         "Lõikasin hiljuti oma juukseid":
-            u "Olgu, tänan vastamast."
+            show Ririmad at center
+            r2 "Olgu, tänan vastamast."
             m "Palun"
             n "Ta läheb oma kontorisse."
+            hide Ririidle
+            hide Ririmad
+            init python:
+                Rating.score(-1)
             jump LastChoice
 
 label LastChoice:
@@ -724,16 +773,21 @@ label LastChoice:
             n "Kõndisid edasi, kuni nägid ust tänavale."
             n "Olete jõudnud F koprusse."
             n "Liia kohtus sinuga"
+            show Liiaidle at center
             l "Tere jälle"
             m "Ku"
             l "Kuidas C-hoones on?"
             m "Jah, okei, ma tegelesin lollustega"
+            show Liiasmirk at center
             l "See on selge"
             m "Muide, ma ei tundnud millestki ilma"
+            show Liiaidle at center
             l "Ei"
             m "Hästi. Ma lähen siis koju. Edu"
             l "Jah, sama sulle"
             n "Sa läksid majast F välja."
+            hide Liiaidle
+            hide Liiasmirk
             jump Conclusion
 
 label Conclusion:
@@ -748,11 +802,11 @@ label Conclusion:
     n "Ja teie austus on ..."
     init python:
         rating.final()
-    if rating.final() == -6:
+    if rating.final() == -5:
         jump BadEnding
-    elif -6 < rating.final() < 6:
+    elif -5 < rating.final() < 4:
         jump NeutralEnding
-    elif rating.final() == 6:
+    elif rating.final() == 4:
         jump GoodEnding
 label BadEnding:
     n "Vau, sa oled mürgine!"
