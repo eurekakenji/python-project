@@ -13,18 +13,17 @@ label decrease:
 
 # character section
 
-define u = Character("???")
-define un = Character("unknown")
-define s = Character("Sass")
-define m = Character("Mängija")
-define j = Character("Jeremy")
-define l = Character("Liia")
-define n = Character("Narrator")
-define b = Character("Raamatukoguhoidja")
-define h = Character("Richard")
-define d = Character("Dan")
-define kd = Character("KD")
-define ri = Character("Riri")
+define u = Character("???", color="ababab")
+define s = Character("Sass", color="5f9afa")
+define m = Character("Mängija", color="f7a736")
+define j = Character("Jeremy", color="36d160")
+define l = Character("Liia", color="6250eb")
+define n = Character("Narrator", color="367d32")
+define b = Character("Raamatukoguhoidja", color="b5b5b5")
+define h = Character("Richard", color="f5f1b3")
+define d = Character("Dan", color="7dc4fa")
+define kd = Character("KD", color="689c80")
+define ri = Character("Riri", color="a6ffcf")
 
 #image section
 image Liiaidle = "Liiaidle.png"
@@ -167,7 +166,7 @@ label fIIfloor:
                 "Mis eriala õpid?":
                     hide Liiaidle
                     show Liiafrown at center
-                    l "Tarkvaraarendust. Ei soovitaks kui sulle meeldib psüühikat hoida. statistilest suurem osa programmeeriatest läksid oma eialale, sest vihkavad ennast."
+                    l "Tarkvaraarendust. Ei soovitaks kui sulle meeldib psüühikat hoida. statistilest suurem osa programmeeriatest läksid oma erialale, sest vihkavad ennast."
                     hide Liiafrown
                     show Liiaidle at center
                     jump questions
@@ -228,7 +227,7 @@ label fIIfloornew:
         "*Raamatukogu*":
                     jump WayLibrary
         "*E korpus*":
-                jump EkorpusII
+                jump EkorpusIInew
         "*1. korrus*": 
             hide Liiaidle
             scene fkorpo
@@ -306,7 +305,7 @@ label EkorpusII:
             d "Idiootne küsimus, muidugi saan."
             menu ego:
                 "Kas su ego on hiigel või?":
-                    call decrease
+                    call decrease from _call_decrease
                     hide Dansmirk
                     show Dand at center
                     d "ei."
@@ -317,7 +316,7 @@ label EkorpusII:
                     jump Danquestionsnew
 
                 "Tore! Parem kui paljud teised, olen kuulnud!":
-                    call increase
+                    call increase from _call_increase
                     hide Danidle
                     show Dansmirk at center
                     d "Lahe, eks?"
@@ -350,6 +349,8 @@ label EkorpusII:
                     jump EkorpusI
 
 label EkorpusIInew:
+    scene ekorpu
+    hide Liiaidle
     show Danidle at center
     d "..."
     menu EIIoptnewnew:
@@ -395,7 +396,7 @@ label EkorpusI:
             j "Noh... Nii hästi kui saan..."
             menu comfort:
                 "Küll sa hakkama saad!":
-                    call increase
+                    call increase from _call_increase_1
                     hide Jfrown
                     show Jsmile at center
                     j "Aitäh."
@@ -420,7 +421,7 @@ label EkorpusI:
                     jump Jeremyquestionsnew
 
                 "Võib-olla oleksid pidanud valima teise eriala?":
-                    call decrease
+                    call decrease from _call_decrease_1
                     hide Jidle
                     show Jfrown
                     j "Ega sina ei tea, mis mulle parim on. Jää vait."
@@ -428,12 +429,12 @@ label EkorpusI:
                     show Jidle at center
                     jump Jeremyquestionsnew
 
-                "*Edasi*":
-                    menu EkorpIopt:
-                            "*2. korrusele*":
-                                jump EkorpusIInew
-                            "*C korpusesse*":
-                                jump CKorpI
+        "*Edasi*":
+            menu EkorpIopt:
+                "*2. korrusele*":
+                    jump EkorpusIInew
+                "*C korpusesse*":
+                    jump CKorpI
 
     menu Jeremyquestionsnew:
         "Mis kursusel oled?":
@@ -442,7 +443,7 @@ label EkorpusI:
             j "Esimeses!"
             hide Jeremysmile
             show Jidle at center
-            jump Jeremyquestions
+            jump Jeremyquestionsnew
 
         "Mis eriala õpid?":
             hide Jidle
@@ -450,7 +451,7 @@ label EkorpusI:
             j "Õpin kokaks!"
             hide Jsmile
             show Jidle at center
-            jump Jeremyquestions
+            jump Jeremyquestionsnew
 
         "*Edasi*":
             menu EkorpIoptnew:
@@ -458,6 +459,16 @@ label EkorpusI:
                     jump EkorpusIInew
                 "*C korpusesse*":
                     jump CKorpI
+
+label EkorpusInew:
+    scene ekorpo
+    show Jidle at center
+    j "..."
+    menu EkorpIoptnewnew:
+        "*2. korrusele*":
+            jump EkorpusIInew
+        "*C korpusesse*":
+            jump CKorpInew
 
 
 label CKorpI:
@@ -485,6 +496,30 @@ label Ckorpopts:
             jump sleepy
         "*Sööklasse*":
             jump fod
+
+label Ckorpoptsnew:
+    scene ckorpent
+    menu movenewnew:
+        "*D korpusesse*":
+            n "Sisened D korpusesse."
+            jump sportnew
+        "*Edasi*":
+            m "Lähed edasi"
+            jump sleepy
+        "*Sööklasse*":
+            jump fod
+
+label Ckorpoptsnewnew:
+    scene ckorpent
+    menu movenewnewII:
+        "*D korpusesse*":
+            n "Sisened D korpusesse."
+            jump sportnew
+        "*Edasi*":
+            m "Lähed edasi"
+            jump sleepy
+        "*Sööklasse*":
+            jump fodnew
 
 label sport:
     scene dakorp
@@ -520,7 +555,7 @@ label sport:
             s "Keevitust."
             menu odd:
                 "Ega ei ole kõik keevitajad idioodid?":
-                    call increase
+                    call increase from _call_increase_2
                     hide Sidle
                     show Ssmirk at center
                     s "Naljakas. Mulle meeldib."
@@ -538,7 +573,7 @@ label sport:
                     jump oddnew
 
                 "Kõik peaksid suhtuma sinusse hästi, eks?":
-                    call decrease
+                    call decrease from _call_decrease_2
                     hide Sidle
                     show Sannoyed at center
                     s "Muidugi mitte."
@@ -549,7 +584,7 @@ label sport:
         "*Edasi*":
                 menu oddopts:
                     "*C korpusesse*":
-                        jump movenew
+                        jump move
 
     menu oddnew:
         "Mis kursusel oled?":
@@ -563,8 +598,13 @@ label sport:
         "*Edasi*":
                 menu oddoptsnew:
                     "*C korpusesse*":
-                        jump Ckorpopts
+                        jump Ckorpoptsnew
 
+label sportnew:
+    scene dakorp
+    show Sidle at center
+    s "..."
+    jump Ckorpoptsnewnew
 
 label fod:
     scene food
@@ -594,7 +634,7 @@ label fod:
             show Richidle at center
             menu auto:
                 "Ega ei ole automaatika lihtsalt täiskasvanute robootika?":
-                    call increase
+                    call increase from _call_increase_3
                     hide Richidle
                     show Richsmile at center
                     h "Oih! Nüüd seda ma kuulnud küll ei ole! Päris naljakas!"
@@ -610,7 +650,7 @@ label fod:
                     jump autonew
                 
                 "Mille jaoks on sul seda üldse vaja?":
-                    call decrease
+                    call decrease from _call_decrease_3
                     hide Richidle
                     show Richfrown at center
                     h "Sest huvitav ja vajalik on! Automaatikuid on väga vaja nüüd!"
@@ -632,7 +672,13 @@ label fod:
             jump Ricardquestions
 
         "*Edasi*":
-            jump Ckorpopts
+            jump Ckorpoptsnewnew
+
+label fodnew:
+    scene food
+    show Richidle at center
+    h "..."
+    jump Ckorpoptsnew
 
 
 label sleepy:
@@ -646,7 +692,7 @@ label sleepy:
         "Ärata ta üles":
             jump waking
         "Jäta ta rahule":
-            call increase
+            call increase from _call_increase_4
             n "Arvad, et jätad ta rahule"
             n "Otsustasid minna B korpusesse"
             jump Bkorpus
@@ -686,7 +732,7 @@ label waking:
     n "Te läksite teisele korrusele"
     scene ckorpu
     show kdidle at center
-    kd "Lühidalt, sa ei leia midagi peale kott-toolide, pingke ja kappe"
+    kd "Lühidalt, sa ei leia midagi peale kott-toolide, pinkide ja kapide"
     hide kdidle
     show kdsmile at center
     kd "Kuigi seal on üks huvitav klass, kus lauad pole nagu teistes klassides."
@@ -705,15 +751,24 @@ label waking:
     show kdwtf at center
     kd "Kas sa küsisid seda tõsiselt? Kas sul pole isegi aimu, kus see olla võib?"
     m "Okei okei, loll küsimus."
-    scene end
+    scene ckorpb
     n "Te lähete alla 0. korrusele"
+    show kdidle at center
     kd "Ja siin on lauatenniselaud."
+    hide kdidle
+    show kdwtf at center
     kd "Nad ei anna sulle reketeid ega tennisepalle."
+    hide kdwtf
+    show kdsmirk at center
     kd "Kuigi kui sul nad on, mida ma loodan, et sul on, siis saame mängida ühe mängu."
     m "Kahjuks mul neid esemeid pole."
+    hide kdsmirk
+    show kdidle at center
     kd "Noh, see tähendab, et ma lähen uuesti magama."
     m "Noh, aitäh, et vähemalt ennast näitasid."
     kd "Peaasi, et mind üles ei ärataks."
+    hide kdidle
+    scene ckorpswi
     n "Te läksite tagasi esimesele korrusele."
     n "KD läks toolile magama"
     n "Ja sa otsustasid minna B korpusesse"
@@ -755,7 +810,7 @@ label Bkorpus:
             ri "Õpin juuksuriks."
             menu hairq:
                 "Ega sa erinevaid haigusi ei saa juuksurina olles?":
-                    call decrease
+                    call decrease from _call_decrease_4
                     hide ririidle
                     show ririmad at center
                     ri "idioot oled või?"
@@ -765,7 +820,7 @@ label Bkorpus:
                     jump ririquestionsnew
 
                 "Huvitav on, eks?":
-                    call increase
+                    call increase from _call_increase_5
                     hide ririidle
                     show ririhappy at center
                     ri "Muidugi! Kogu aeg saab uusi asju provida, väga lahe on!"
@@ -806,6 +861,7 @@ label LastChoice:
             n "Kõnnid kuni näed kooli peaust."
             jump Conclusion
         "Välju C korpuse kaudu.":
+            scene ckorpswi
             n "Oled tagasi C korpuses."
             n "Nägid KD jälle toolil magamas."
             n "Kuid sa otsustasid teda mitte äratada, sa ei tea kunagi, mida ta sinuga teeb."
@@ -844,17 +900,17 @@ label Conclusion:
     n "Kõik"
     n "Selle mängu lugu on läbi"
     n "Loodan, et sulle meeldis see, mida me selle aja jooksul tegime."
-    if gen_rating == -5:
+    if gen_rating <= -3:
         jump BadEnding
-    elif -5 < gen_rating < 4:
+    elif -3 < gen_rating < 2:
         jump NeutralEnding
-    elif gen_rating == 4:
+    elif gen_rating >= 2:
         jump GoodEnding
 label BadEnding:
     n "Aga noh,"
     n "kuna sa solvasid kõiki, ei taha keegi sind isegi näha."
     n "Sa mõistsid seda kohe ja otsustasid seetõttu sinna mitte minna."
-    n "Ja ma arvan, et sinust saab mingi korrapidaja, või McDonaldsi töötaja."
+    n "Ja ma arvan, et sinust saab mingi korrapidaja, või Hesburgeri töötaja."
     n "Vali paremaid teekondi järgmine kord."
     n "Aitäh mängimast!"
     return
